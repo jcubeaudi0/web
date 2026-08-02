@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>jCubeAudio | DJ, Photobooth & Live Band Services</title>
+  <meta name="description" content="jCubeAudio provides DJ entertainment, photobooth rentals, live band support, lighting, and event production for weddings, parties, and special events." />
+  <style>
+    :root {
+      --bg: #07070d;
+      --panel: #11111d;
+      --panel-soft: #181827;
+      --gold: #d6b56d;
+      --gold-light: #ffe7a3;
+      --text: #ffffff;
+      --muted: #c9c2b3;
+      --line: rgba(214,181,109,.28);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background:
+        radial-gradient(circle at top left, rgba(214,181,109,.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(255,255,255,.07), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; }
+
+    .container { width: 90%; max-width: 1180px; margin: auto; }
+
+    header {
+      background: rgba(7,7,13,.92);
+      backdrop-filter: blur(16px);
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 28px;
+      min-height: 74px;
+    }
+
+    .logo img {
+      height: 64px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: .95rem;
+    }
+
+    .nav-links a:hover { color: var(--gold-light); }
+
+    section { padding: 78px 0; }
+
+    .eyebrow {
+      color: var(--gold-light);
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: .8rem;
+      margin-bottom: 16px;
+      font-weight: bold;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(2.7rem, 6vw, 5.8rem);
+      line-height: .95;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+      color: var(--gold-light);
+    }
+
+    h3 {
+      margin: 20px 0 6px;
+      color: #fff;
+      font-size: 1.15rem;
+    }
+
+    p {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    ul {
+      margin-left: 20px;
+      color: #eee7d7;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--gold), #9d7730);
+      color: #111;
+      padding: 13px 22px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-top: 14px;
+      font-family: Arial, sans-serif;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,.25);
+      box-shadow: 0 14px 30px rgba(0,0,0,.35);
+      cursor: pointer;
+    }
+
+    .btn:hover { filter: brightness(1.08); }
+
+    .section-intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 36px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .services {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: stretch;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,.36);
+    }
+
+    .card-body { padding: 24px; }
+
+    .service-img {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .service-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(7,7,13,.72));
+    }
+
+    .service-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(7,7,13,.72);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 1.7rem;
+      position: absolute;
+      left: 22px;
+      bottom: 18px;
+      z-index: 1;
+    }
+
+    .dj-img {
+      background-image: url('https://images.unsplash.com/photo-1571266028243-d220c6a7edbf?auto=format&fit=crop&w=900&q=80');
+    }
+
+    .photo-img {
+      background-image: url('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=900&q=80');
+    }
+
+    .band-img {
+      background-image: url('https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=900&q=80');
+    }
+
+    .package {
+      padding: 14px 0;
+      border-top: 1px solid rgba(214,181,109,.18);
+    }
+
+    .price {
+      color: var(--gold-light);
+      font-weight: bold;
+    }
+
+    .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .video-card {
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--panel-soft);
+      box-shadow: 0 18px 45px rgba(0,0,0,.28);
+    }
+
+    .video-card iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 220px;
+      border: 0;
+      display: block;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    form input,
+    form textarea,
+    form select {
+      width: 100%;
+      padding: 13px;
+      margin-top: 6px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    form select option { color: #111; }
+    textarea { min-height: 130px; resize: vertical; }
+
+    footer {
+      text-align: center;
+      padding: 38px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .footer-logo {
+      height: 70px;
+      width: auto;
+      margin: 0 auto 18px;
+      display: block;
+      opacity: .92;
+    }
+
+    @media(max-width: 900px) {
+      .services, .contact-box { grid-template-columns: 1fr; }
+      nav { flex-direction: column; gap: 12px; min-height: auto; }
+      .logo img { height: 56px; }
+      .nav-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <img src="assets/jcube_logo.png" alt="jCubeAudio Logo" />
+      </div>
+      <div class="nav-links">
+        <a href="#services">Our Services</a>
+        <a href="#gallery">Event Highlights</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section id="services">
+  <div class="container">
+    <div class="section-intro">
+      <div class="eyebrow">Our Services</div>
+      <h2>Three ways to elevate your event</h2>
+      <p>Choose one service or combine packages for a complete entertainment experience.</p>
+    </div>
+
+    <div class="grid services">
+      <div class="card">
+        <div class="service-img dj-img"><div class="service-icon">🎧</div></div>
+        <div class="card-body">
+          <h2>Sound System & DJ Packages</h2>
+          <p>Professional DJ entertainment with premium audio production, event lighting, and videoke available upon request.</p>
+
+          <div class="package">
+            <h3>Basic Package</h3>
+            <p><span class="price">Up to 75 guests — $800 for 4 hours</span></p>
+            <ul>
+              <li>Professional DJ performance</li>
+              <li>Premium sound reinforcement</li>
+              <li>Event lighting setup</li>
+            </ul>
+          </div>
+
+          <div class="package">
+            <h3>Midsize Package</h3>
+            <p><span class="price">Up to 200 guests — $1000 for 4 hours</span></p>
+            <ul>
+              <li>Professional DJ performance</li>
+              <li>Enhanced audio coverage</li>
+              <li>Event lighting setup</li>
+            </ul>
+          </div>
+
+          <div class="package">
+            <h3>Large Package</h3>
+            <p><span class="price">Up to 300 guests — $1200 for 4 hours</span></p>
+            <ul>
+              <li>Professional DJ performance</li>
+              <li>Full-range sound reinforcement</li>
+              <li>Event lighting setup</li>
+            </ul>
+          </div>
+
+          <div class="package">
+            <h3>Add-on</h3>
+            <p><span class="price">Projector & Screen — $150</span></p>
+          </div>
+
+          <a class="btn" href="#contact">Book Sound & DJ</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="service-img photo-img"><div class="service-icon">📸</div></div>
+        <div class="card-body">
+          <h2>Photobooth Packages</h2>
+          <p>Stylish photo and video booth experiences with custom overlays, fun props, and instant digital sharing.</p>
+
+          <div class="package">
+            <h3>Standard Photobooth</h3>
+            <p><span class="price">$400 for 3 hours — $50/hr after</span></p>
+            <ul>
+              <li>Custom overlay</li>
+              <li>Props included</li>
+              <li>2x6 photo prints included</li>
+              <li>FREE photobooth album</li>
+              <li>4x6 prints available for additional $50</li>
+            </ul>
+          </div>
+
+          <div class="package">
+            <h3>Digital Only Booth</h3>
+            <p><span class="price">$250 for 3 hours — $25/hr after</span></p>
+            <ul>
+              <li>No prints</li>
+              <li>Instant sharing by Airdrop, email, or QR code</li>
+            </ul>
+          </div>
+
+          <div class="package">
+            <h3>360 Video Booth</h3>
+            <p><span class="price">$300 for 3 hours — $50/hr after</span></p>
+            <ul>
+              <li>Video only</li>
+              <li>Instant sharing by Airdrop, email, or QR code</li>
+            </ul>
+          </div>
+
+          <a class="btn" href="#contact">Book Photobooth</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="service-img band-img"><div class="service-icon">🎸</div></div>
+        <div class="card-body">
+          <h2>Live Band Services</h2>
+          <p>Live music support with professional band equipment and optional musicians for a high-energy performance.</p>
+
+          <div class="package">
+            <h3>Live Band Equipment</h3>
+            <p><span class="price">Starting at $500 (based on setup requirements)</span></p>
+            <ul>
+              <li>Drums, guitar, and keyboard support</li>
+              <li>Guitar/Bass and Keyboard Amp</li>
+              <li>Monitor speakers</li>
+              <li>Up to 6 microphones</li>
+            </ul>
+          </div>
+
+          <div class="package">
+            <h3>Live Band Musicians</h3>
+            <p><span class="price">Additional cost: TBD</span></p>
+            <ul>
+              <li>2 sets (10 songs per set)</li>
+              <li>Perfect for parties, weddings, and celebrations</li>
+            </ul>
+          </div>
+
+          <a class="btn" href="#contact">Book Live Band</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <div class="section-intro">
+      <div class="eyebrow">Event Highlights</div>
+      <h2>Event highlights</h2>
+      <p>Add your YouTube video links here to showcase your events.</p>
+    </div>
+
+    <div class="grid gallery">
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/7_fmyuyqUyg"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/rSBGp3pIIUQ"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>	  
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/FZdnfzTBBuM"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/j2_ZwgOzSXY"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/oMX4kaoMuTk"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+	  
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/XWm_WzcfyX0"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/CKSOySKeRXg"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+	  
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/Cyzxp32YEYA"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+	  	  
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/a7LDfqcp980"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+	  
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/sC7GDmAIbfA"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/NZIMDdqnQBI"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+ 	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/2m4NYc5pDD0"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>		  
+	  <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/j_bARAluNdg"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+	  
+	  
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/Uc8IU8aMRp0"
+          title="jCubeAudio event video 1"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/lhOOlIuvNAA"
+          title="jCubeAudio event video 1"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/jG4UnJDSaf0"
+          title="jCubeAudio event video 2"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/cxuTwnvcsuw"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div> 
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/HgDDUVCgm1U"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div> 	  
+
+      <div class="video-card">
+        <iframe
+          src="https://www.youtube.com/embed/C4prqeQxSH0"
+          title="jCubeAudio event video 3"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div> 	  	  
+	  
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-intro">
+      <div class="eyebrow">Contact Us</div>
+      <h2>Let’s create an unforgettable event</h2>
+      <p>Contact jCubeAudio for availability, pricing, and package combinations.</p>
+    </div>
+
+    <div class="contact-box">
+      <div class="card">
+        <div class="card-body">
+          <h2>Contact Us</h2>
+          <p><strong>Eric</strong></p>
+          <p>📞 <a href="tel:19082498307" style="color: var(--gold-light);">908-249-8307</a></p>
+          <p>📧 <a href="mailto:jcubeaudio@gmail.com" style="color: var(--gold-light);">jcubeaudio@gmail.com</a></p>
+          <p>Available for private parties, weddings, birthdays, corporate events, and special occasions.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <form action="mailto:jcubeaudio@gmail.com" method="post" enctype="text/plain">
+            <input type="text" name="name" placeholder="Name" required />
+            <input type="email" name="email" placeholder="Email" required />
+            <select name="service" required>
+              <option value="">Select Service</option>
+              <option>Sound System & DJ</option>
+              <option>Photobooth</option>
+              <option>Live Band</option>
+              <option>Package Combination</option>
+            </select>
+            <textarea name="message" placeholder="Tell us your event date, location, guest count, and service needed"></textarea>
+            <button class="btn" type="submit">Send Inquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <img class="footer-logo" src="assets/jcube_logo.png" alt="jCubeAudio Logo" />
+    © 2026 jCubeAudio · DJ, Photobooth & Live Band Services
+  </div>
+</footer>
+</body>
+</html>
